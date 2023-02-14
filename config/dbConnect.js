@@ -1,6 +1,7 @@
 const {default:mongoose} = require("mongoose")
 
-const dcConnect = () => {
+
+const dbConnect = () => {
     try{
         const conn = mongoose.connect(process.env.MONGODB_URL);
         console.log("Database Connected Successfully");
