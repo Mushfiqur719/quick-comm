@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const ObjectId = mongoose.Schema.Types.ObjectId
 const bcrypt = require("bcrypt");
 
 var userSchema = new mongoose.Schema({
@@ -26,8 +27,18 @@ var userSchema = new mongoose.Schema({
     role:{
         type:String,
         default:"user",
+    },
+    cart:{
+        type:Array,
+        default:[]
+    },
+    address:[{type:ObjectId,ref:"Address"}],
+    wishlist:[{type:ObjectId,ref:"Product"}]
+},
+    {
+        timestamps:true
     }
-});
+);
 
 userSchema.pre("save", async function (next){
     const salt = await bcrypt.genSaltSync(10);
