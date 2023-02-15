@@ -37,7 +37,10 @@ var userSchema = new mongoose.Schema({
         default:[]
     },
     address:[{type:ObjectId,ref:"Address"}],
-    wishlist:[{type:ObjectId,ref:"Product"}]
+    wishlist:[{type:ObjectId,ref:"Product"}],
+    refreshToken:{
+        type: String,
+    }
 },
     {
         timestamps:true
@@ -51,5 +54,5 @@ userSchema.pre("save", async function (next){
 userSchema.methods.isPasswordMatched = async function(enteredPassword){
     return await bcrypt.compare(enteredPassword,this.password);
 }
-
+//Export the model
 module.exports = mongoose.model('User', userSchema);
