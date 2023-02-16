@@ -1,5 +1,5 @@
 const {default:mongoose} = require("mongoose")
-
+mongoose.set('strictQuery', true);
 
 const dbConnect = () => {
     try{
