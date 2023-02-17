@@ -4,8 +4,11 @@ const asyncHandler = require("express-async-handler");
 
 const authMiddleware = asyncHandler(async (req, res, next) => {
   let token;
+  // log the value of the authorization header
+  console.log(req.headers.authorization); 
   if (req?.headers?.authorization?.startsWith("Bearer")) {
     token = req.headers.authorization.split(" ")[1];
+    console.log(token);
     try {
       if (token) {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -20,6 +23,8 @@ const authMiddleware = asyncHandler(async (req, res, next) => {
     throw new Error(" There is no token attached to header");
   }
 });
+
+
 const isAdmin = asyncHandler(async (req, res, next) => {
   const { email } = req.user;
   const adminUser = await User.findOne({ email });
