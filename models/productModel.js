@@ -1,5 +1,5 @@
 const mongoose = require('mongoose'); // Erase if already required
-const ObjectId = mongoose.Types.ObjectId;
+const ObjectId = mongoose.Schema.Types.ObjectId;
 // Declare the Schema of the Mongo model
 var productSchema = new mongoose.Schema({
     title:{
