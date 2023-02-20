@@ -2,63 +2,61 @@ const mongoose = require('mongoose'); // Erase if already required
 const ObjectId = mongoose.Schema.Types.ObjectId;
 // Declare the Schema of the Mongo model
 var productSchema = new mongoose.Schema({
-    title:{
-        type:String,
-        required:true,
+    title: {
+        type: String,
+        required: true,
         trim: true,
     },
-    slug:{
-        type:String,
-        required:true,
-        unique:true,
-        lowercase:true,
+    slug: {
+        type: String,
+        required: true,
+        unique: true,
+        lowercase: true,
     },
-    description:{
-        type:String,
-        required:true,
+    description: {
+        type: String,
+        required: true,
     },
-    price:{
-        type:Number,
-        required:true,
+    price: {
+        type: Number,
+        required: true,
     },
-    category:{
-        type:String,
-        required:true,
+    category: {
+        type: String,
+        required: true,
     },
-    brand:{
-        type:String,
-        required:true,
+    brand: {
+        type: String,
+        required: true,
     },
-    quantity:{
-        type:Number,
-        default:1,
+    quantity: {
+        type: Number,
+        default: 1,
     },
-    sold:{
-        type:Number,
-        default:0,
-        select:false,
+    sold: {
+        type: Number,
+        default: 0,
+        select: false,
     },
-    images:{
-        type:Array
+    images: [],
+    color: {
+        type: String,
+        required: true,
     },
-    color:{
-        type:String,
-        required:true,
-    },
-    ratings:[
+    ratings: [
         {
-            star:Number,
+            star: Number,
             comment: String,
-            postedby:{type:ObjectId,ref:"User"},
+            postedby: { type: ObjectId, ref: "User" },
         },
     ],
-    totalrating:{
-        type:String,
-        default:0,
+    totalrating: {
+        type: String,
+        default: 0,
     },
 
 },
-    { timestamps:true}
+    { timestamps: true }
 );
 
 //Export the model
