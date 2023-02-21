@@ -36,18 +36,18 @@ router.post("/login", loginUserCtrl);
 router.post("/admin-login", loginAdmin);
 router.post("/forgot-password-token", forgotPasswordToken);
 router.put("/reset-password/:token", resetPassword);
-router.put("/order/update-order/:id",authMiddleware,isAdmin,updateOrderStatus);
+router.put("/order/update-order/:id", authMiddleware, isAdmin, updateOrderStatus);
 
 router.get("/refresh", handleRefreshToken);
 router.get("/logout", logout);
 router.get("/all-users", getAllUser);
 router.get("/get-orders", authMiddleware, getOrders);
 router.get("/getall-orders", authMiddleware, isAdmin, getAllOrders);
-router.post("/getorder-byuser/:id", authMiddleware, isAdmin, getOrderByUserId);
+router.get("/getorder-byuser/:id", authMiddleware, isAdmin, getOrderByUserId);
 
 router.post("/cart", authMiddleware, userCart);
 router.post("/cart/applycoupon", authMiddleware, applyCoupon);
-router.post("/cart/cash-order",authMiddleware,createOrder);
+router.post("/cart/cash-order", authMiddleware, createOrder);
 router.get("/cart", authMiddleware, getUserCart)
 router.delete("/empty-cart", authMiddleware, emptyCart)
 router.put("/password", authMiddleware, updatePassword);
