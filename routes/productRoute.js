@@ -5,7 +5,6 @@ const {
     getAllProduct,
     updateProduct,
     deleteProduct,
-    addToWishlist,
     rating,
     uploadImages,
 } = require("../controller/productCtrl");
@@ -19,7 +18,6 @@ const router = express.Router();
 router.post("/", authMiddleware, isAdmin, createProduct);
 
 router.get("/:id", getProduct);
-router.put("/wishlist", authMiddleware, isAdmin, addToWishlist);
 router.put("/rating", authMiddleware, rating);
 
 router.put("/:id", authMiddleware, isAdmin, updateProduct);

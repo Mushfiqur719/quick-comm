@@ -4,42 +4,44 @@ const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 
 var userSchema = new mongoose.Schema({
-    firstname:{
+    firstname: {
         type: String,
         required: true,
     },
-    lastname:{
+    lastname: {
         type: String,
         required: true,
     },
-    email:{
+    email: {
         type: String,
         required: true,
     },
-    mobile:{
+    mobile: {
         type: String,
         required: true,
         unique: true,
     },
-    password:{
+    password: {
         type: String,
         required: true,
     },
-    role:{
-        type:String,
-        default:"user",
+    role: {
+        type: String,
+        default: "user",
     },
-    isBlocked:{
-        type:Boolean,
-        default:false
+    isBlocked: {
+        type: Boolean,
+        default: false
     },
-    cart:{
+    cart: {
         type: Array,
         default: []
     },
-    address:[{type:ObjectId,ref:"Address"}],
-    wishlist:[{type:ObjectId,ref:"Product"}],
-    refreshToken:{
+    address: {
+        type: String,
+    },
+    wishlist: [{ type: ObjectId, ref: "Product" }],
+    refreshToken: {
         type: String,
     },
     passwordChangedAt: Date,
@@ -47,20 +49,20 @@ var userSchema = new mongoose.Schema({
     passwordResetExpires: Date,
 },
     {
-        timestamps:true
+        timestamps: true
     }
 );
 
-userSchema.pre("save", async function (next){
-    if(!this.isModified("password")){
+userSchema.pre("save", async function (next) {
+    if (!this.isModified("password")) {
         next();
     }
     const salt = await bcrypt.genSaltSync(10);
     this.password = await bcrypt.hash(this.password, salt);
 });
 
-userSchema.methods.isPasswordMatched = async function(enteredPassword){
-    return await bcrypt.compare(enteredPassword,this.password);
+userSchema.methods.isPasswordMatched = async function (enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password);
 }
 
 userSchema.methods.createPasswordResetToken = async function () {
@@ -69,7 +71,7 @@ userSchema.methods.createPasswordResetToken = async function () {
         .createHash("sha256")
         .update(resettoken)
         .digest("hex")
-    this.passwordResetExpires = Date.now() + 30*60*1000; //10 Minutes
+    this.passwordResetExpires = Date.now() + 30 * 60 * 1000; //10 Minutes
     return resettoken;
 };
 
