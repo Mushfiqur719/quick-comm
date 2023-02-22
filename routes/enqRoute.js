@@ -5,9 +5,9 @@ const router = express.Router();
 
 router.get("/", getAllEnquiry);
 router.get("/:id", getEnquiry);
-router.post("/", authMiddleware, isAdmin, createEnquiry);
-router.put("/:id", authMiddleware, isAdmin, updateEnquiry);
-router.delete("/:id", authMiddleware, isAdmin, deleteEnquiry);
+router.post("/", authMiddleware, createEnquiry);
+router.put("/:id", authMiddleware, updateEnquiry);
+router.delete("/:id", authMiddleware, deleteEnquiry);
 
 
 module.exports = router;
